@@ -1,27 +1,28 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Checkout{% endblock %}
 
 {% block content %}
 <div class="card shadow-custom border-0 col-lg-7 mx-auto mb-3">
   <h3 class="py-2 font-weight-bold text-grey text-center">
-    Delivery information:
+    Информация о доставке:
   </h3>
 
   <script src="https://js.stripe.com/v3/"></script> 
 
-  <form method="post" id="payment-form">  
+  <form method="post" id="payment-form">
     {% csrf_token %}
     <div class="row">
       <div class="col-md-6">
         <div class="input-field">
-          <label class="text-muted">First name</label>
+          <label class="text-muted">Имя</label>
           {{ order_form.first_name }}
         </div>
       </div>
       <div class="col-md-6">
         <div class="input-field">
-          <label class="text-muted">Last name</label>
+          <label class="text-muted">Фамилия</label>
           {{ order_form.last_name }}
         </div>
       </div>
@@ -33,7 +34,7 @@
       </div>
       <div class="col-md-6">
         <div class="input-field">
-          <label class="text-muted">Phone number</label>
+          <label class="text-muted">Номер телефона</label>
           {{ order_form.telephone }}
         </div>
       </div>
@@ -42,41 +43,41 @@
     <div class="row">
       <div class="col-md-6">
         <div class="input-field">
-          <label class="text-muted">Address</label>
+          <label class="text-muted">Адрес</label>
           {{ order_form.address }}
         </div>
       </div>
       <div class="col-md-6">
         <div class="input-field">
-          <label class="text-muted">Postal code</label>
+          <label class="text-muted">Индекс</label>
           {{ order_form.postal_code }}
         </div>
       </div>
       <div class="col-md-6">
         <div class="input-field mb-0">
-          <label class="text-muted">City</label>
+          <label class="text-muted">Город</label>
           {{ order_form.city }}
         </div>
       </div>
       <div class="col-md-6">
         <div class="input-field mb-0">
-          <label class="text-muted">Country</label>
+          <label class="text-muted">Страна</label>
           {{ order_form.country }}
         </div>
       </div>
     </div>
     {% if not request.user.is_authenticated %}
       <div class="mt-2 text-center">
-        Already registered? 
-{#        <a href="{% url 'login' %}"#}
-{#          class="text-decoration-none">#}
-{#          Log in#}
-{#        </a>   #}
+          Уже зарегистрирован?
+        <a href="{% url 'login' %}"
+          class="text-decoration-none">
+          Вход
+        </a>
       </div>  
     {% endif %}
     <hr>
     <h4 class="py-2 font-weight-bold text-grey">
-      Transport:
+      Транспорт:
     </h4>
     <div class="row">
       <div class="col-md-12">
@@ -84,7 +85,7 @@
           <input type="radio" id="id_transport_0" name="transport" 
             value="Courier delivery" amount="{{ transport_cost }}"
             checked onclick="setTotalCost()" />
-          <label for="id_transport_0">Courier delivery
+          <label for="id_transport_0">Доставка курьером
             <span class="text-danger float-right pr-3 font-weight-bold">
               ${{ transport_cost }}</span>
           </label>
@@ -93,15 +94,16 @@
           <input type="radio" id="id_transport_1" name="transport" 
             value="Recipient pickup" amount="free"
             onclick="setTotalCost()" />
-          <label for="id_transport_1">Recipient pickup
+          <label for="id_transport_1">Доставка самостоятельно
             <span class="text-green float-right pr-3 font-weight-bold">
-              free
+              бесплатно
             </span>
           </label>
         </div>
       </div>
     </div>
-    <h4 class="py-2 font-weight-bold text-grey">Payment:</h4>
+    <h4 class="py-2 font-weight-bold text-grey">Оплата:</h4>
+    <h4 class="py-2 font-weight-bold text-grey">4242424242424242</h4>
     <div class="form-row">
       <div id="card-element">
       <!-- A Stripe Element will be inserted here. -->
@@ -112,11 +114,15 @@
     </div>
     <hr class="mb-4">
     <div class="input-field">
-      <label class="text-muted">Note</label>
+      <label class="text-muted">Примечание
+      </label>
       {{ order_form.note }}
     </div>
-    <h4 class="py-2 font-weight-bold text-grey">Price total:
-      <span id="order-total" class="text-danger float-right">
+    <h4 class="py-2 font-weight-bold text-grey">Всего цена:
+{#        ${{ order.get_total_cost|floatformat:2 }}#}
+{#                        {{ cart_total_price|floatformat:2 }}#}
+
+        <span id="order-total" class="text-danger float-right">
       </span>
     </h4>
   </div>
@@ -126,10 +132,10 @@
         <div class="btn-group d-flex">
           <a href="{% url 'listings:product_list' %}" 
             class="btn btn-warning shadow-custom col">
-            Back to shop
+              Вернуться к магазину
           </a>
           <button type="submit" class="btn btn-danger shadow-custom col">
-            Create order
+              Создать заказ
           </button>
         </div>
       </div>
@@ -138,6 +144,8 @@
 </form>
 <script>
   // Create a Stripe client.
+
+  {#var stripe = Stripe('pk_test_51MNBRPC5Uox12A6891WYQiDbULhWaonlrNPGKiwJraYxZpn86ykXmdncVHPGQq37M1cjMA3QywLDXC2EZTI79eOn003FBNh7M2');#}
   var stripe = Stripe('pk_test_51KN8ToGMQ2Qb6Vd094ktPgk4xHEQubeU2PjGxTOjm1gbgaNH30YWUdfJOMRt42DBq2lidFDg5YrlCGsQfKbfnIsN00s58K7wb5');
 
   // Create an instance of Elements.
@@ -209,3 +217,4 @@
 </script>
 
 {% endblock content %}
+{% block js %}<script src=" {% static 'js/scripts.js' %}"></script> {% endblock js %}

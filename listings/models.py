@@ -54,13 +54,14 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        # рассчитать средний рейтинг наших товаров
+
         return reverse(
             'listings:product_detail',
             args=[self.category.slug, self.slug]
         )
 
     def get_average_review_score(self):
+        # рассчитать средний рейтинг наших товаров
         average_score = 0.0
         if self.reviews.count() > 0:
             total_score = sum([review.rating for review in self.reviews.all()])

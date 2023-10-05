@@ -19,11 +19,35 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+#'mozilla_django_oidc'
+from mozilla_django_oidc import views as oidc_views
+# from easy_shop.authentication import views as auth_views
+
 urlpatterns = [
+    path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
+    #'mozilla_django_oidc'
+    path(
+        "authorization-code/authenticate/",
+        oidc_views.OIDCAuthenticationRequestView.as_view(),
+        name="oidc_authentication_init",
+    ),
+    path(
+        "authorization-code/callback/",
+        oidc_views.OIDCAuthenticationCallbackView.as_view(),
+        name="oidc_authentication_callback",
+    ),
     path('cart/', include('cart.urls', namespace='cart')),
     path('orders/', include('orders.urls', namespace='orders')),
+    path('authcriipto/', include('authcriipto.urls', namespace='authcriipto')),
+
     path('', include('listings.urls', namespace='listings')),
+
+    # OAuth2
+    # path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    # path('api-auth/', include('rest_framework.urls')),
+
+
 ]
 
 if settings.DEBUG:
