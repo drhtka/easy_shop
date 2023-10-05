@@ -1,14 +1,23 @@
 # -*- coding: utf-8 -*-
+import logging
+
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Product, Review
 from .forms import ReviewForm
 from cart.forms import CartAddProductForm
 
-def product_list(request, category_slug=None):
+LOGGER = logging.getLogger(__name__)
+
+def product_list(request, category_slug=None, claims=None):
     categories = Category.objects.all()
     # requested_category = None
     # products = Product.objects.all()
 
+    # LOGGER.debug(f"oidc_states-list-22, '{request.session.get['oidc_states']}'")
+    # if request.session.get['oidc_states'] is not None:
+    #     request.session['oidc_states_myOIDCstate'] = request.session.get['oidc_states']
+    # else:
+    #     request.session.get['oidc_states_myOIDCstate'] = 0
     if category_slug:
         requested_category = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(category=requested_category)

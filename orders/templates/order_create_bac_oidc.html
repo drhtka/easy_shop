@@ -1,0 +1,370 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Checkout{% endblock %}
+
+удалил 4 файла
+этот
+K:\D\django_project_work\easy_shop_deploy\cart\templates\detail.html
+сеттинг
+и урл
+и 3 файла в папке core
+
+{% block content %}
+<div class="card shadow-custom border-0 col-lg-7 mx-auto mb-3">
+  <h3 class="py-2 font-weight-bold text-grey text-center">
+    Информация о доставке:
+  </h3>
+    <script type="text/javascript" src="https://unpkg.com/@criipto/auth-js"></script>
+  <script src="https://js.stripe.com/v3/"></script> 
+
+{#  <form method="post" id="payment-form" action="https://tinez-test.criipto.id/oauth2/authorize?scope=openid&client_id=urn:my:application:identifier:9115&redirect_uri=https://ninjana.setesdal.pp.ua/my-orders/&response_type=id_token&response_mode=fragment&nonce=ecnon-d01e10ff-4c3e-4078-be4a-4ddd257d8029&prompt=login&acr_values=urn:grn:authn:dk:mitid:low&login_hint=action:approve message:VHJhbnNmZXIgRVVSIDEwMCB0byBJQkFOIERLMTIzNDU2NzgxMjM0">#}
+
+{#  <form method="post" id="payment-form" action="https://inesauces-test.criipto.id/oauth2/authorize?scope=openid&client_id=urn:finesauces:identifier:8933&redirect_uri=http://finesauces.pp.ua/orders/create/&response_type=code&response_mode=query&nonce=ecnon-4259be2d-f12b-45b1-a626-0c609c8b51dd&prompt=login&acr_values=urn:grn:authn:no:bankid urn:grn:authn:no:bankid:substantial urn:grn:authn:dk:mitid:low">#}
+
+
+
+      {#      https://inesauces-test.criipto.id/oauth2/authorize?#}
+{#      scope=openid&#}
+{#      client_id=urn:finesauces:identifier:8933&#}
+{#      redirect_uri=http://finesauces.pp.ua/orders/create/&#}
+{#      response_type=id_token&#}
+{#      response_mode=fragment&#}
+{#      nonce=ecnon-757dec3f-4ec5-4970-85c4-e2871e0d4d4a&#}
+{#      acr_values=urn:grn:authn:dk:mitid:low urn:grn:authn:dk:mitid:substantial urn:grn:authn:no:bankid urn:grn:authn:no:bankid:substantial#}
+
+
+{#  ответ  06022022 #}
+{#      http://finesauces.pp.ua/orders/create/?code=14500d0df9b2475495e5e7e43e5feeec #}
+
+
+{##}
+{#      <form method="post" id="payment-form" action="#}
+{#    https://inesauces-test.criipto.id/oauth2/authorize?#}
+{#	scope=openid&#}
+{#	client_id=urn:finesauces:identifier:8933&#}
+{#	redirect_uri=http://finesauces.pp.ua/orders/create/&#}
+{#	response_type=id_token&#}
+{#	response_mode=fragment&#}
+{#	nonce=ecnon-093ff8f7-5882-43a7-ae28-046176ed3acd&#}
+{#	prompt=login&#}
+{#	acr_values=urn:grn:authn:no:bankid urn:grn:authn:no:bankid:substantial">#}
+
+
+{#    <a href="{% url 'oidc_authentication_init' %}">Log In</a>#}
+{#  <form method="get" id="payment-form" action="{% url 'oidc_authentication_init' %}">#}
+
+{#  <form method="post" id="payment-form" action="{{ criipto_url }}">#}
+{#  <form method="post" id="payment-form" action="{% url 'authcriipto:index' %}">#}
+
+  <form method="post" id="payment-form">
+
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="input-field">
+          <label class="text-muted">Имя</label>
+          {{ order_form.first_name }}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="input-field">
+          <label class="text-muted">Фамилия</label>
+          {{ order_form.last_name }}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="input-field">
+          <label class="text-muted">Email</label>
+          {{ order_form.email }}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="input-field">
+          <label class="text-muted">Номер телефона</label>
+          {{ order_form.telephone }}
+        </div>
+      </div>
+    </div>
+    <hr class="mt-0">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="input-field">
+          <label class="text-muted">Адрес</label>
+          {{ order_form.address }}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="input-field">
+          <label class="text-muted">Индекс</label>
+          {{ order_form.postal_code }}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="input-field mb-0">
+          <label class="text-muted">Город</label>
+          {{ order_form.city }}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="input-field mb-0">
+          <label class="text-muted">Страна</label>
+          {{ order_form.country }}
+        </div>
+      </div>
+    </div>
+
+{#      {{ user.username }} -username#}
+
+    {% if not request.user.is_authenticated %}
+      <div class="mt-2 text-center">
+          Уже зарегистрирован?
+        <a href="{% url 'login' %}"
+          class="text-decoration-none">
+          Вход
+        </a>
+      </div>
+    {% endif %}
+    <hr>
+    <h4 class="py-2 font-weight-bold text-grey">
+      Транспорт:
+    </h4>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="radiobtn">
+          <input type="radio" id="id_transport_0" name="transport"
+            value="Courier delivery" amount="{{ transport_cost }}"
+            checked onclick="setTotalCost()" />
+          <label for="id_transport_0">Доставка курьером
+            <span class="text-danger float-right pr-3 font-weight-bold">
+              ${{ transport_cost }}</span>
+          </label>
+        </div>
+        <div class="radiobtn">
+          <input type="radio" id="id_transport_1" name="transport"
+            value="Recipient pickup" amount="free"
+            onclick="setTotalCost()" />
+          <label for="id_transport_1">Доставка самостоятельно
+            <span class="text-green float-right pr-3 font-weight-bold">
+              бесплатно
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <h4 class="py-2 font-weight-bold text-grey">Оплата:</h4>
+    <h4 class="py-2 font-weight-bold text-grey">4242424242424242</h4>
+    <div class="form-row">
+      <div id="card-element">
+      <!-- A Stripe Element will be inserted here. -->
+      </div>
+
+      <!-- Used to display form errors. -->
+      <div id="card-errors" role="alert"></div>
+    </div>
+    <hr class="mb-4">
+    <div class="input-field">
+      <label class="text-muted">Примечание
+      </label>
+      {{ order_form.note }}
+    </div>
+    <h4 class="py-2 font-weight-bold text-grey">Всего цена:
+{#        ${{ order.get_total_cost|floatformat:2 }}#}
+{#                        {{ cart_total_price|floatformat:2 }}#}
+
+        <span id="order-total" class="text-danger float-right">
+      </span>
+    </h4>
+  </div>
+  <div class="col-lg-7 mx-auto mb-3">
+    <div class="row justify-content-end">
+      <div class="col-lg-8 px-0">
+        <div class="btn-group d-flex">
+          <a href="{% url 'listings:product_list' %}" 
+            class="btn btn-warning shadow-custom col">
+              Вернуться к магазину
+          </a>
+          <button type="submit" class="btn btn-danger shadow-custom col">
+{#          <button type="submit"  onclick="preventOrder(this)" class="btn btn-danger shadow-custom col">#}
+              Создать заказ
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{#    <div>#}
+{#        <a href="#modal" onclick="showModal()">Open Modal</a>#}
+{#    </div>#}
+
+{#    модальное окно старт#}
+{#    <button id="login-button-popup">Login Criipto</button>#}
+{#    <div id="result"></div>#}
+{#    модальное окно конец#}
+
+
+{#    <a href="{% url 'oidc_authentication_init' %}">#}
+{#        <button type="submit"  class="btn btn-danger shadow-custom col">#}
+{#         Страйп#}
+{#        </button>#}
+{#    </a>#}
+<script>
+    {#localStorage.setItem('outs', '0')#}
+  // Create a Stripe client.
+
+  {#var stripe = Stripe('pk_test_51MNBRPC5Uox12A6891WYQiDbULhWaonlrNPGKiwJraYxZpn86ykXmdncVHPGQq37M1cjMA3QywLDXC2EZTI79eOn003FBNh7M2');#}
+  var stripe = Stripe('pk_test_51KN8ToGMQ2Qb6Vd094ktPgk4xHEQubeU2PjGxTOjm1gbgaNH30YWUdfJOMRt42DBq2lidFDg5YrlCGsQfKbfnIsN00s58K7wb5');
+
+  // Create an instance of Elements.
+  var elements = stripe.elements();
+
+  // Custom styling can be passed to options when creating an Element.
+  // (Note that this demo uses a wider set of styles than the guide below.)
+  var style = {
+    base: {
+      color: '#32325d',
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: 'antialiased',
+      fontSize: '16px',
+      '::placeholder': {
+        color: '#aab7c4'
+      }
+    },
+    invalid: {
+      color: '#fa755a',
+      iconColor: '#fa755a'
+    }
+  };
+
+  // Create an instance of the card Element.
+  var card = elements.create('card', { style: style });
+
+  // Add an instance of the card Element into the `card-element` <div>.
+  card.mount('#card-element');
+  // Handle real-time validation errors from the card Element.
+  card.on('change', function (event) {
+    var displayError = document.getElementById('card-errors');
+    if (event.error) {
+      displayError.textContent = event.error.message;
+    } else {
+      displayError.textContent = '';
+    }
+  });
+
+  // Handle form submission.
+  var form = document.getElementById('payment-form');
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    stripe.createToken(card).then(function (result) {
+      if (result.error) {
+        // Inform the user if there was an error.
+        var errorElement = document.getElementById('card-errors');
+        errorElement.textContent = result.error.message;
+      } else {
+        // Send the token to your server.
+        stripeTokenHandler(result.token);
+      }
+    });
+  });
+
+  // Submit the form with the token ID.
+  function stripeTokenHandler(token) {
+    // Insert the token ID into the form so it gets submitted to the server
+    var form = document.getElementById('payment-form');
+    var hiddenInput = document.createElement('input');
+    hiddenInput.setAttribute('type', 'hidden');
+    hiddenInput.setAttribute('name', 'stripeToken');
+    hiddenInput.setAttribute('value', token.id);
+    form.appendChild(hiddenInput);
+
+    // Submit the form
+    form.submit();
+  }
+
+  /*function preventOrder (event) {
+      event.preventDefault();
+      console.log(localStorage.getItem('outs'))
+
+      alert('364576')
+      if (localStorage.getItem('outs') !== '1' ) {
+          document.getElementById("payment-form").setAttribute('action', '{% url 'oidc_authentication_init' %}')
+          localStorage.setItem('outs', 1)
+          {#location.href="{% url 'oidc_authentication_init' %}"#}
+      } else {
+          document.getElementById("payment-form").setAttribute('action', '')
+      }
+
+      {#location.href="https://inesauces-test.criipto.id/oauth2/authorize?response_type=code&redirect_uri=http://finesauces.pp.ua/authorization-code/callback/&acr_values=urn:grn:authn:no:bankid urn:grn:authn:no:bankid:substantial urn:grn:authn:dk:mitid:low&"#}
+      {#let modal = document.getElementById('modal');#}
+      {#modal.style.display = "block";#}
+
+
+  }*/
+
+  /*document.getElementById("payment-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      alert('3222')
+      console.log('outsoutsout-1111111111111111', localStorage.getItem('outs'))
+      console.log('valueToken', document.getElementsByName('csrfmiddlewaretoken')[0].value)
+      if (localStorage.getItem('outs') === '0' ) {
+          console.log('outsoutsout-333333333', localStorage.getItem('outs'))
+          document.getElementById("payment-form").setAttribute('action', '{% url 'oidc_authentication_init' %}')
+          document.getElementById("payment-form").setAttribute('method', 'get')
+          localStorage.setItem('outs', '1')
+          {#localStorage.setItem('tmpToken', document.getElementsByName('csrfmiddlewaretoken')[0].value)#}
+          document.getElementById("payment-form").submit()
+          alert('if')
+      } else {
+          console.log('outsoutso-444444444444', localStorage.getItem('outs'))
+          document.getElementsByName('csrfmiddlewaretoken')[0].value
+          document.getElementById("payment-form").setAttribute('action', '')
+          document.getElementById("payment-form").setAttribute('method', 'post')
+          document.getElementsByName('csrfmiddlewaretoken')[0].value = localStorage.getItem('tmpToken')
+          document.getElementById("payment-form").submit()
+          alert('else')
+      }
+      console.log('outsoutso-2222222222222222', localStorage.getItem('outs'))
+  });
+
+</script>
+{#    <script>#}
+{#        function showModal(){#}
+{#            document.getElementById('modal').style.display = 'block';#}
+{#        }#}
+{#    </script>#}
+{#    <div id="modal" style="display:none">#}
+{#        <iframe src="{% url 'oidc_authentication_init' %}" name="modal" width="400" height="200" frameborder="1" style="margin: 0 auto">Testiframe</iframe>#}
+{#        <iframe src="https://example.com/modal.html" name="modal" width="400" height="200" frameborder="1" style="margin: 0 auto">Testiframe</iframe>#}
+{#    </div>#}
+
+    <script type="text/javascript">
+
+        var criiptoAuth = new CriiptoAuth({
+            domain: 'inesauces-test.criipto.id',
+            clientID: 'urn:finesauces:identifier:8933',
+            store: sessionStorage,
+        });
+
+        document
+            .getElementById('login-button-popup')
+            .addEventListener('click', () => {
+                criiptoAuth.popup
+                    .authorize({
+                        width: 300,
+                        height: 400,
+                        redirectUri: 'http://finesauces.pp.ua/authorization-code/callback/',
+                        acrValues: 'urn:grn:authn:no:bankid urn:grn:authn:no:bankid:substantial urn:grn:authn:dk:mitid:low',
+                    })
+                    .then((result) => {
+                        console.log(result, result.id_token, result.claims);
+                        document.getElementById('result').textContent =
+                            JSON.stringify(result);
+                    });
+            });
+    </script>
+{% endblock content %}
+{% block js %}<script src=" {% static 'js/scripts.js' %}"></script>
+    <script type="text/javascript" src="https://unpkg.com/@criipto/auth-js"></script>
+{% endblock js %}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="test-BankID" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="fast">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="root@104.248.255.60:22 password">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/easy_shop" local="$PROJECT_DIR$" />
+            <mapping deploy="/home/easy_shop/venv/lib/python3.9/site-packages/mozilla_django_oidc" local="$USER_HOME$/AppData/Local/JetBrains/PyCharm2022.2/remote_sources/2119746526/-587460095/mozilla_django_oidc" web="" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="root@167.71.67.104:22 password">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="test-BankID">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/easy_shop" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="websocket@192.168.181.129:2202">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

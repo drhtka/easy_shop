@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Welcome to my OAuth Protected App!</h1>
+<a href="{% url 'listings:product_list' %}" class="navbar-brand">
+    <h3 class="font-weight-bold">изысканные соусы</h3>
+</a>
+<p>Please log in to continue.</p>
+{% endblock content %}

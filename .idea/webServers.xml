@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="7a1518ca-3010-4d70-9c75-d3f185741edf" name="test-BankID">
+        <fileTransfer accessType="SFTP" host="104.248.255.60" port="22" sshConfigId="40bc9b9f-a7ab-4231-86e6-fd4f6b4333f2" sshConfig="root@104.248.255.60:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="54c9dec5-7f0e-4ed2-981e-e7cb02e18c3d" name="root@104.248.255.60:22 password">
+        <fileTransfer accessType="SFTP" host="104.248.255.60" port="22" sshConfigId="40bc9b9f-a7ab-4231-86e6-fd4f6b4333f2" sshConfig="root@104.248.255.60:22 password" />
+      </webServer>
+    </option>
+  </component>
+</project>

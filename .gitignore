@@ -59,7 +59,7 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
+# Unit test.txt / coverage reports
 htmlcov/
 .tox/
 .nox/
@@ -224,7 +224,7 @@ fabric.properties
 
 # Installer logs
 
-# Unit test / coverage reports
+# Unit test.txt / coverage reports
 
 # Translations
 
